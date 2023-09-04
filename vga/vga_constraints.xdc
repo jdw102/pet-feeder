@@ -2,19 +2,20 @@
 ALLOW_COMBINATORIAL_LOOPS TRUE[get_nets CPU/dx_stage/instr_reg/loop1[0].dff/q_reg_1]
 
 //Motor PWM
-set_property PACKAGE_PIN V11 [get_ports motorPWM]
+set_property PACKAGE_PIN D17 [get_ports motorPWM]
 set_property IOSTANDARD LVCMOS33 [get_ports motorPWM]
 
 // Buttons
 set_property IOSTANDARD LVCMOS33 [get_ports buttonInputs]
-set_property PACKAGE_PIN C17 [get_ports buttonInputs[0]]
-set_property PACKAGE_PIN D18 [get_ports buttonInputs[1]]
-set_property PACKAGE_PIN E18 [get_ports buttonInputs[2]]
-set_property PACKAGE_PIN G17 [get_ports buttonInputs[3]]
-set_property PACKAGE_PIN D14 [get_ports buttonInputs[4]]
-set_property PACKAGE_PIN F16 [get_ports buttonInputs[5]]
-set_property PACKAGE_PIN G16 [get_ports buttonInputs[6]]
+set_property PACKAGE_PIN F16 [get_ports buttonInputs[0]]
+set_property PACKAGE_PIN C17 [get_ports buttonInputs[1]]
+set_property PACKAGE_PIN G17 [get_ports buttonInputs[2]]
+set_property PACKAGE_PIN G16 [get_ports buttonInputs[3]]
+set_property PACKAGE_PIN E18 [get_ports buttonInputs[4]]
+set_property PACKAGE_PIN E17 [get_ports buttonInputs[5]]
+set_property PACKAGE_PIN D14 [get_ports buttonInputs[6]]
 set_property PACKAGE_PIN H14 [get_ports buttonInputs[7]]
+set_property PACKAGE_PIN D18 [get_ports buttonInputs[8]]
 
 // Clock on E3
 set_property PACKAGE_PIN E3 [get_ports {clock}]

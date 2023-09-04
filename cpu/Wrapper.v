@@ -26,7 +26,7 @@
 
 module Wrapper (clock, reset, buttonInputs, hSync, vSync, motorPWM, VGA_R, VGA_G, VGA_B, lights);
 	input clock, reset;
-	input [7:0] buttonInputs;
+	input [8:0] buttonInputs;
 	output hSync; 		// H Sync Signal
 	output vSync; 		// Veritcal Sync Signal
 	output motorPWM;
@@ -41,8 +41,8 @@ module Wrapper (clock, reset, buttonInputs, hSync, vSync, motorPWM, VGA_R, VGA_G
 		rData, regA, regB,
 		memAddr, memDataIn, memDataOut;
 
-	wire [7:0] buttons;
-	wire [7:0] audioPress;
+	wire [8:0] buttons;
+	wire [8:0] audioPress;
 
 	debounce_button deb1(clock, buttonInputs[0], audioPress[0], buttons[0]);
 	debounce_button deb2(clock, buttonInputs[1], audioPress[1], buttons[1]);
@@ -52,6 +52,7 @@ module Wrapper (clock, reset, buttonInputs, hSync, vSync, motorPWM, VGA_R, VGA_G
 	debounce_button deb6(clock, buttonInputs[5], audioPress[5], buttons[5]);
 	debounce_button deb7(clock, buttonInputs[6], audioPress[6], buttons[6]);
 	debounce_button deb8(clock, buttonInputs[7], audioPress[7], buttons[7]);
+	debounce_button deb9(clock, buttonInputs[8], audioPress[8], buttons[8]);
 
 	// ADD YOUR MEMORY FILE HERE
 	localparam INSTR_FILE = "C:/Users/User/Documents/Spring2023/ece350/pet_feeder_repo/program/pet_feed_test";
@@ -96,8 +97,7 @@ module Wrapper (clock, reset, buttonInputs, hSync, vSync, motorPWM, VGA_R, VGA_G
 		.hour3(hour3), .min3(min3), .ampm3(ampm3), .pwmControl(pwmControl), .screenState(screenState), .out3(buttonRegData), .duration(duration));
 
 	assign lights[3:0] = hour1[3:0];
-	assign lights[11:4] = audioPress;
-	assign lights[12] = buttonWrite;
+	assign lights[12:4] = audioPress;
 						
 	// Processor Memory (RAM)
 	RAM ProcMem(.clk(clock), 

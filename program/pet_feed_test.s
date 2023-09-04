@@ -41,6 +41,13 @@ addi $screen, $r0, 5
 j pressedEditClock
 # Check for save triggers
 next5:
+addi $r5, $r0, 9
+bne $button, $r5, next6
+bne $screen, $r0, next6
+jal resetButtonReg
+jal triggerFeed
+j endCheckButtons
+next6:
 bne $currS, $r0, endCheckButtons
 j checkSaves
 endCheckButtons:
@@ -97,6 +104,9 @@ addi $currH, $currH, 1
 nextEditClock1:
 bne $button, $r24, nextEditClock2
 jal resetButtonReg
+bne $currH, $r0, skipClockFix
+addi $currH, $r0, 12
+skipClockFix:
 addi $r6, $r0, 59
 blt $currM, $r6, skipSetClockMinZero
 addi $currM, $r0, 0
@@ -122,8 +132,28 @@ j checkButtons
 
 pressedEnter:
 addi $r5, $r0, 4
-bne $screen, $r5, endCheckButtons
+bne $screen, $r5, enterNext
 j pressedEnterSaveScreen
+enterNext:
+addi $r5, $r0, 0
+bne $screen, $r5, endCheckButtons
+j pressedEnterIdleScreen
+
+
+pressedEnterIdleScreen:
+addi $r5, $r0, 5
+bne $duration, $r5, enterIdleNext1
+addi $duration, $r0, 8
+j endCheckButtons
+enterIdleNext1:
+addi $r5, $r0, 8
+bne $duration, $r5, enterIdleNext2
+addi $duration, $r0, 11
+j endCheckButtons
+enterIdleNext2:
+addi $duration, $r0, 5
+j endCheckButtons
+
 
 pressedDelete:
 addi $r5, $r0, 4
@@ -181,6 +211,9 @@ addi $hour1, $hour1, 1
 nextEditFirst1:
 bne $button, $r24, nextEditFirst2 
 jal resetButtonReg
+bne $hour1, $r0, skipFirstFix
+addi $hour1, $r0, 12
+skipFirstFix:
 addi $r6, $r0, 59
 blt $min1, $r6, skipSetMinZero1
 addi $min1, $r0, 0
@@ -217,6 +250,9 @@ addi $hour2, $hour2, 1
 nextEditSecond1:
 bne $button, $r24, nextEditSecond2 
 jal resetButtonReg
+bne $hour2, $r0, skipSecondFix
+addi $hour2, $r0, 12
+skipSecondFix:
 addi $r6, $r0, 59
 blt $min2, $r6, skipSetMinZero2
 addi $min2, $r0, 0
@@ -253,6 +289,9 @@ addi $hour3, $hour3, 1
 nextEditThird1:
 bne $button, $r24, nextEditThird2 
 jal resetButtonReg
+bne $hour3, $r0, skipThirdFix
+addi $hour3, $r0, 12
+skipThirdFix:
 addi $r6, $r0, 59
 blt $min3, $r6, skipSetMinZero3
 addi $min3, $r0, 0

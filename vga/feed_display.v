@@ -68,7 +68,7 @@ module feed_display(input clk, reset, feed, input[31:0] duration, print, input[9
             counter <= 0;
             if (feed) begin
                 seconds <= seconds + 1;
-                if (duration == 4) begin
+                if (duration == 5) begin
                     case (seconds)
                         32'd1: add = 10'b0000000111;
                         32'd2: add = 10'b0000111111;
@@ -76,7 +76,7 @@ module feed_display(input clk, reset, feed, input[31:0] duration, print, input[9
                         default: add = 10'b0;
                     endcase
                 end
-                if (duration == 6) begin
+                if (duration == 8) begin
                     case (seconds)
                         32'd1: add = 10'b0000000011;
                         32'd2: add = 10'b0000001111;

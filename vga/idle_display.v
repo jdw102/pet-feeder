@@ -20,7 +20,7 @@ module idle_display(input clk, reset, input [5:0] state, input[31:0] dur, input 
 
 	always @(dur) begin
 		case (dur)
-			32'd6: size = 8'd97;
+			32'd8: size = 8'd97;
 			32'd11: size = 8'd98;
 			default: size = 8'd96;
 		endcase
